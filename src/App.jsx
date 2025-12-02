@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import CallerPage from './pages/CallerPage'
 import AccessPoint from './pages/AcessPoint'
+import SwitchPage from './pages/SwitchPage'
 // import UsersPage from './pages/UsersPage'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
            <Route path="" element={<MainDashboard />} />
            <Route path="/list-caller" element={<CallerPage />} />
            <Route path="/access-point" element={<AccessPoint />} />
+            <Route path="/switch" element={<SwitchPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

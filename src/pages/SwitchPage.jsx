@@ -4,107 +4,6 @@
 // import Box from '@mui/material/Box'; 
 // import InfoCard from '../components/InfoCard'; 
 // import { FaAndroid, FaApple, FaShoppingCart, FaBug, FaWifi, FaLaptop, FaMapMarkerAlt, FaPowerOff } from 'react-icons/fa';
-// import  CallerApi from "../api/CallerApi";
-// import { useEffect } from "react";
-
-// const columns = [
-//   { field: 'id', headerName: 'ID', width: 70 },
-//   { field: 'deviceName', headerName: 'Tên Thiết Bị', width: 150 },
-//   { 
-//     field: 'ipAddress', 
-//     headerName: 'Địa Chỉ IP', 
-//     flex: 1, 
-//     minWidth: 180 
-//   },
-//   { field: 'factoryArea', headerName: 'Khu Vực Nhà Máy', width: 150 },
-//   { 
-//     field: 'status', 
-//     headerName: 'Tình Trạng', 
-//     width: 120,
-//     renderCell: (params) => (
-//         <span 
-//             style={{ 
-//                 color: params.value === 'Online' ? 'green' : 'red', 
-//                 fontWeight: 'bold' 
-//             }}
-//         >
-//             {params.value}
-//         </span>
-//     )
-//   },
-//   { field: 'lastActive', headerName: 'Lần Cuối Hoạt Động', width: 220 },
-// ];
-// const paginationModel = { page: 0, pageSize: 10 };
-// const CallerPage = () => {
-// const [devices, setDevices] = useState([]);
-// const [callers, setCallers] = useState([]);
-
-// const loadDevices = async () => {
-//   try {
-//     const res = await CallerApi.getAllCaller();
-//     console.log("abc", res.data);
-//     const apiDevices = res.data.data.devices;
-//     const formatted = apiDevices.map((d) => ({
-//       id: d.device_id,
-//       deviceName: d.device_name,
-//       ipAddress: d.ip,
-//       factoryArea: d.area,
-//       status: d.status === "online" ? "Online" : "Offline",
-//       lastActive: d.ping_time,
-//     }));
-//     setCallers(formatted);
-//   } catch (error) {
-//     console.error("Error loading devices:", error);
-//   }
-// };
-// useEffect(() => {
-//   loadDevices();
-// }, []);
-//   const stats = useMemo(() => {
-//     const total = callers.length;
-//     const online = callers.filter(c => c.status === 'Online').length;
-//     const offline = total - online;
-//     const areas = new Set(callers.map(c => c.factoryArea)).size;
-//     return [
-//       { value: total, title: 'Tổng Thiết Bị', bgColor: 'bg-blue-50', icon: FaLaptop, iconColor: 'text-blue-500' },
-//       { value: online, title: 'Đang Hoạt Động (Online)', bgColor: 'bg-cyan-50', icon: FaWifi, iconColor: 'text-cyan-500' },
-//       { value: offline, title: 'Ngoại Tuyến (Offline)', bgColor: 'bg-red-50', icon: FaPowerOff, iconColor: 'text-red-500' },
-//       { value: areas, title: 'Tổng Khu Vực', bgColor: 'bg-yellow-50', icon: FaMapMarkerAlt, iconColor: 'text-yellow-500' },
-//     ];
-//   }, [callers]);
-  
-//   return (
-//     <div className="p-8 bg-gray-50 flex-grow w-full"> 
-//       {/* 1. Info Cards */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-//         {stats.map((data, index) => (
-//           <InfoCard key={index} {...data} /> 
-//         ))}
-//       </div>
-      
-//       {/* 2. Data Grid */}
-//       <Paper elevation={3} sx={{ height: 600, width: '100%' }}>
-//         <DataGrid
-//           rows={callers} 
-//           columns={columns}
-//           initialState={{ pagination: { paginationModel } }}
-//           pageSizeOptions={[5, 10]}
-//           checkboxSelection
-//           sx={{ border: 0 }}
-//         />
-//       </Paper>
-//     </div>
-//   );
-// };
-
-// export default CallerPage;
-
-// import React, { useState, useMemo } from "react";
-// import { DataGrid } from '@mui/x-data-grid';
-// import Paper from '@mui/material/Paper';
-// import Box from '@mui/material/Box'; 
-// import InfoCard from '../components/InfoCard'; 
-// import { FaAndroid, FaApple, FaShoppingCart, FaBug, FaWifi, FaLaptop, FaMapMarkerAlt, FaPowerOff } from 'react-icons/fa';
 // import  SwitchApi from "../api/SwitchApi";
 // import { useEffect } from "react";
 
@@ -208,7 +107,7 @@ import Typography from "@mui/material/Typography";
 
 import InfoCard from '../components/InfoCard';
 import { FaWifi, FaLaptop, FaMapMarkerAlt, FaPowerOff } from 'react-icons/fa';
-import  CallerApi from "../api/CallerApi";
+import SwitchApi from "../api/SwitchApi";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -235,14 +134,14 @@ const columns = [
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const CallerPage = () => {
+const SwitchPage = () => {
   const [callers, setCallers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadDevices = async () => {
     try {
       setLoading(true);
-      const res = await CallerApi.getAllCaller();
+      const res = await SwitchApi.getAllCaller();
       console.log("abc", res.data);
 
       const apiDevices = res.data.data.devices;
@@ -324,4 +223,4 @@ const CallerPage = () => {
   );
 };
 
-export default CallerPage;
+export default SwitchPage;

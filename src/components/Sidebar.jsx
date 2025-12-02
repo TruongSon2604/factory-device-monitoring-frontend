@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiLayout, FiUser, FiShoppingBag, FiBookOpen, FiLogIn, FiAlertTriangle } from 'react-icons/fi';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaRegUserCircle,FaNetworkWired  } from 'react-icons/fa';
 import { ASSETS } from '../assets/asset.js';
 import { BsFillDeviceSsdFill } from 'react-icons/bs';
 import { NavLink } from "react-router-dom";
@@ -11,7 +11,7 @@ const menuItems = [
   { id: 1, text: 'Dashboard', path: "/", icon: FiLayout },
   { id: 2, text: 'Caller', path: "/list-caller", icon: BsFillDeviceSsdFill },
   { id: 3, text: 'Access Point',path: "/access-point", icon: FiShoppingBag },
-  { id: 4, text: 'Blog',path: "/blog", icon: FiBookOpen },
+  { id: 4, text: 'Switch',path: "/switch", icon: FaNetworkWired },
   { id: 5, text: 'Logout',path: "/logout", icon: FiLogIn },
   { id: 6, text: 'Not Found',path: "/not-found", icon: FiAlertTriangle },
 ];
