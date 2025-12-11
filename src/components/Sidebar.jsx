@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiLayout, FiUser, FiShoppingBag, FiBookOpen, FiLogIn, FiAlertTriangle } from 'react-icons/fi';
+import { FiLayout, FiUser, FiShoppingBag, FiBookOpen, FiLogIn, FiAlertTriangle, FiMessageSquare } from 'react-icons/fi';
 import { FaRegUserCircle,FaNetworkWired  } from 'react-icons/fa';
 import { ASSETS } from '../assets/asset.js';
 import { BsFillDeviceSsdFill } from 'react-icons/bs';
@@ -13,7 +13,7 @@ const menuItems = [
   { id: 3, text: 'Access Point',path: "/access-point", icon: FiShoppingBag },
   { id: 4, text: 'Switch',path: "/switch", icon: FaNetworkWired },
   { id: 5, text: 'Logout',path: "/logout", icon: FiLogIn },
-  { id: 6, text: 'Not Found',path: "/not-found", icon: FiAlertTriangle },
+  { id: 6, text: 'AI Chat',path: "/ai-chat", icon: FiMessageSquare },
 ];
 
 const Sidebar = () => {

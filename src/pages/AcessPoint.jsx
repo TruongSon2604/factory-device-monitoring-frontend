@@ -8,11 +8,32 @@ import Typography from "@mui/material/Typography";
 import InfoCard from '../components/InfoCard';
 import { FaWifi, FaLaptop, FaMapMarkerAlt, FaPowerOff } from 'react-icons/fa';
 import APointApi from "../api/APointApi";
+import BasicModal from "../components/Modal";
 
+
+
+const AcessPoint = () => {
+  const [callers, setCallers] = useState([]);
+  const [loading, setLoading] = useState(true);
+// const [selectedImage, setSelectedImage] = useState(null);
+const [selectedDevice, setSelectedDevice] = useState(null);
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'deviceName', headerName: 'Tên Thiết Bị', width: 350 },
   { field: 'deviceType', headerName: 'Loại Thiết Bị', width: 350 },
+   { field: 'image', headerName: 'Hình Ảnh', width: 150,
+    renderCell: (params) => (
+      <img 
+        src={params.value} 
+        alt="device" 
+        style={{ width:60, height:60, objectFit:"cover", borderRadius:8 }}
+         onClick={() => {
+          // setSelectedImage(params.value); 
+          setSelectedDevice(params.row)
+        }} 
+      />
+    )
+  },
   { field: 'ipAddress', headerName: 'Địa Chỉ IP', flex: 1, minWidth: 180 },
   { field: 'factoryArea', headerName: 'Khu Vực Nhà Máy', width: 150 },
   { 
@@ -32,13 +53,7 @@ const columns = [
   },
   { field: 'lastActive', headerName: 'Lần Cuối Hoạt Động', width: 220 },
 ];
-
 const paginationModel = { page: 0, pageSize: 10 };
-
-const AcessPoint = () => {
-  const [callers, setCallers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const loadDevices = async () => {
     try {
       setLoading(true);
@@ -54,6 +69,7 @@ const AcessPoint = () => {
         factoryArea: d.area,
         status: d.status === "online" ? "Online" : "Offline",
         lastActive: d.ping_time,
+        image: "http://localhost:8000/storage/" + d.image
       }));
 
       setCallers(formatted);
@@ -85,6 +101,12 @@ const AcessPoint = () => {
   return (
     <div className="p-8 bg-gray-50 flex-grow w-full">
 
+        {selectedDevice && (
+      <BasicModal 
+        device={selectedDevice} 
+        onClose={() => setSelectedDevice(null)}
+      />
+    )}
       {/* 1. Info Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {stats.map((data, index) => (
