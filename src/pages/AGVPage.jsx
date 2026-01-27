@@ -7,15 +7,13 @@ import Typography from "@mui/material/Typography";
 
 import InfoCard from '../components/InfoCard';
 import { FaWifi, FaLaptop, FaMapMarkerAlt, FaPowerOff } from 'react-icons/fa';
-import APointApi from "../api/APointApi";
+import AGVApi from "../api/AGVApi";
 import BasicModal from "../components/Modal";
 
 
-
-const AcessPoint = () => {
+const AGVPage = () => {
   const [callers, setCallers] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [selectedImage, setSelectedImage] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState(null);
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -37,7 +35,6 @@ const AcessPoint = () => {
     },
     { field: 'ipAddress', headerName: 'Địa Chỉ IP', flex: 1, minWidth: 180 },
     { field: 'factoryArea', headerName: 'Khu Vực Nhà Máy', width: 150 },
-    { field: 'detail_location', headerName: 'Trục', width: 150 },
     {
       field: 'status',
       headerName: 'Tình Trạng',
@@ -55,12 +52,15 @@ const AcessPoint = () => {
     },
     { field: 'lastActive', headerName: 'Lần Cuối Hoạt Động', width: 220 },
   ];
+
   const paginationModel = { page: 0, pageSize: 10 };
+
+
   const loadDevices = async () => {
     try {
       setLoading(true);
-      const res = await APointApi.getAllCaller();
-      console.log("Ap", res.data);
+      const res = await AGVApi.getAllAGV();
+
       const apiDevices = res.data.data.devices;
 
       const formatted = apiDevices.map((d) => ({
@@ -101,8 +101,7 @@ const AcessPoint = () => {
   }, [callers]);
 
   return (
-    <div className="p-8 bg-gray-50 flex-grow w-full">
-
+    <div className="p-8 bg-gray-50 flex-grow">
       {selectedDevice && (
         <BasicModal
           device={selectedDevice}
@@ -148,4 +147,4 @@ const AcessPoint = () => {
   );
 };
 
-export default AcessPoint;
+export default AGVPage;

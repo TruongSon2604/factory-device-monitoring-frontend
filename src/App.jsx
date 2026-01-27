@@ -10,18 +10,21 @@ import CallerPage from './pages/CallerPage'
 import AccessPoint from './pages/AcessPoint'
 import SwitchPage from './pages/SwitchPage'
 import ChatApp from './pages/AIChat'
-// import UsersPage from './pages/UsersPage'
+import DashboardPage from './pages/Dashboard'
+import AGVPage from './pages/AGVPage'
 
 function App() {
   return (
-  <BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-           <Route path="" element={<MainDashboard />} />
-           <Route path="/list-caller" element={<CallerPage />} />
-           <Route path="/access-point" element={<AccessPoint />} />
-            <Route path="/switch" element={<SwitchPage />} />
-            <Route path="/ai-chat" element={<ChatApp />} />
+          <Route path="" element={<MainDashboard />} />
+          <Route path="/list-caller" element={<CallerPage />} />
+          <Route path="/access-point" element={<AccessPoint />} />
+          <Route path="/switch" element={<SwitchPage />} />
+          <Route path="/ai-chat" element={<ChatApp />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/AGV" element={<AGVPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

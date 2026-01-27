@@ -18,31 +18,33 @@ const SwitchPage = () => {
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'deviceName', headerName: 'Tên Thiết Bị', width: 350 },
-    { field: 'deviceType', headerName: 'Loại Thiết Bị', width: 350 },
-    { field: 'image', headerName: 'Hình Ảnh', width: 150,
+    { field: 'deviceType', headerName: 'Loại Thiết Bị', width: 150 },
+    {
+      field: 'image', headerName: 'Hình Ảnh', width: 150,
       renderCell: (params) => (
-        <img 
-          src={params.value} 
-          alt="device" 
-          style={{ width:60, height:60, objectFit:"cover", borderRadius:8 }}
+        <img
+          src={params.value}
+          alt="device"
+          style={{ width: 60, height: 60, objectFit: "cover", borderRadius: 8 }}
           onClick={() => {
             // setSelectedImage(params.value); 
             setSelectedDevice(params.row)
-          }} 
+          }}
         />
       )
     },
     { field: 'ipAddress', headerName: 'Địa Chỉ IP', flex: 1, minWidth: 180 },
     { field: 'factoryArea', headerName: 'Khu Vực Nhà Máy', width: 150 },
-    { 
-      field: 'status', 
-      headerName: 'Tình Trạng', 
+    { field: 'detail_location', headerName: 'Trục', width: 150 },
+    {
+      field: 'status',
+      headerName: 'Tình Trạng',
       width: 120,
       renderCell: (params) => (
-        <span 
-          style={{ 
-            color: params.value === 'Online' ? 'green' : 'red', 
-            fontWeight: 'bold' 
+        <span
+          style={{
+            color: params.value === 'Online' ? 'green' : 'red',
+            fontWeight: 'bold'
           }}
         >
           {params.value}
@@ -59,7 +61,6 @@ const SwitchPage = () => {
     try {
       setLoading(true);
       const res = await SwitchApi.getAllCaller();
-      console.log("abc", res.data);
 
       const apiDevices = res.data.data.devices;
 
@@ -67,11 +68,12 @@ const SwitchPage = () => {
         id: d.device_id,
         deviceName: d.device_name,
         ipAddress: d.ip,
-         deviceType: d.device_type,
+        deviceType: d.device_type,
         factoryArea: d.area,
         status: d.status === "online" ? "Online" : "Offline",
         lastActive: d.ping_time,
-        image: "http://localhost:8000/storage/" + d.image
+        image: "http://localhost:8000/storage/" + d.image,
+        detail_location: d.detail_location
       }));
 
       setCallers(formatted);
@@ -101,13 +103,13 @@ const SwitchPage = () => {
   }, [callers]);
 
   return (
-    <div className="p-8 bg-gray-50 flex-grow w-full">
-        {selectedDevice && (
-      <BasicModal 
-        device={selectedDevice} 
-        onClose={() => setSelectedDevice(null)}
-      />
-    )}
+    <div className="p-8 bg-gray-50 flex-grow">
+      {selectedDevice && (
+        <BasicModal
+          device={selectedDevice}
+          onClose={() => setSelectedDevice(null)}
+        />
+      )}
       {/* 1. Info Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {stats.map((data, index) => (
@@ -118,7 +120,7 @@ const SwitchPage = () => {
       {/* 2. Data Grid */}
       <Paper elevation={3} sx={{ height: 600, width: '100%', position: "relative" }}>
         {loading ? (
-          <Box 
+          <Box
             sx={{
               display: "flex",
               justifyContent: "center",
